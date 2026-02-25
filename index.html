@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cravix GFX Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0f0f0f;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* Animated Gradient Background */
+body::before{
+    content:"";
+    position:fixed;
+    width:200%;
+    height:200%;
+    background:linear-gradient(45deg,#ff004f,#00f7ff,#ffea00,#ff004f);
+    animation:animateBG 10s linear infinite;
+    z-index:-1;
+    filter:blur(150px);
+}
+
+@keyframes animateBG{
+    0%{transform:translate(-25%,-25%) rotate(0deg);}
+    100%{transform:translate(-25%,-25%) rotate(360deg);}
+}
+
+header{
+    text-align:center;
+    padding:40px 20px;
+    font-size:2rem;
+    font-weight:600;
+}
+
+/* Grid Layout */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    padding:40px;
+}
+
+/* Thumbnail Card */
+.card{
+    position:relative;
+    overflow:hidden;
+    border-radius:15px;
+    cursor:pointer;
+    transition:0.4s ease;
+}
+
+.card img{
+    width:100%;
+    display:block;
+    transition:0.5s ease;
+}
+
+/* Hover Zoom Effect */
+.card:hover img{
+    transform:scale(1.1);
+}
+
+/* Light Glow Effect */
+.card:hover{
+    box-shadow:0 0 20px #00f7ff,
+               0 0 40px #ff004f;
+}
+
+/* Sliding Overlay Effect */
+.overlay{
+    position:absolute;
+    bottom:-100%;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:0.5s ease;
+}
+
+.card:hover .overlay{
+    bottom:0;
+}
+
+.overlay h3{
+    color:#fff;
+    font-size:1.3rem;
+}
+
+/* Click Ripple Effect */
+.ripple{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,0.5);
+    transform:scale(0);
+    animation:rippleEffect 0.6s linear;
+}
+
+@keyframes rippleEffect{
+    to{
+        transform:scale(4);
+        opacity:0;
+    }
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    font-size:0.9rem;
+    opacity:0.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>🔥 Cravix GFX Thumbnail Portfolio 🔥</header>
+
+<section class="gallery">
+
+    <div class="card">
+        <img src="https://picsum.photos/500/300?random=1">
+        <div class="overlay"><h3>Gaming Thumbnail</h3></div>
+    </div>
+
+    <div class="card">
+        <img src="https://picsum.photos/500/300?random=2">
+        <div class="overlay"><h3>Reaction Thumbnail</h3></div>
+    </div>
+
+    <div class="card">
+        <img src="https://picsum.photos/500/300?random=3">
+        <div class="overlay"><h3>Podcast Thumbnail</h3></div>
+    </div>
+
+    <div class="card">
+        <img src="https://picsum.photos/500/300?random=4">
+        <div class="overlay"><h3>Vlog Thumbnail</h3></div>
+    </div>
+
+</section>
+
+<footer>© 2026 Cravix GFX | All Rights Reserved</footer>
+
+<script>
+
+// Ripple Click Effect
+document.querySelectorAll(".card").forEach(card=>{
+    card.addEventListener("click",function(e){
+
+        const ripple=document.createElement("span");
+        ripple.classList.add("ripple");
+
+        const rect=card.getBoundingClientRect();
+        ripple.style.left=e.clientX-rect.left+"px";
+        ripple.style.top=e.clientY-rect.top+"px";
+
+        card.appendChild(ripple);
+
+        setTimeout(()=>{
+            ripple.remove();
+        },600);
+
+    });
+});
+
+</script>
+
+</body>
+</html>
